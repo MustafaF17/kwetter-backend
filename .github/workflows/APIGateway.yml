@@ -7,7 +7,7 @@ on:
       - ".github/workflows/APIGateway.yml"
 
 env:
-  PROJECT_PATH: 'OcelotAPIGateway/OcelotAPIGateway.csproj'
+  PROJECT_PATH: 'APIGateway/APIGateway.csproj'
 
 jobs:
   build:
