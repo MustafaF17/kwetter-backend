@@ -42,4 +42,4 @@ jobs:
         context: ./
         file: LikeService_Dockerfile
         push: true
-        tags: ${{ secrets.DOCKERHUB_USERNAME }}/LikeService:latest
+        tags: ${{ secrets.DOCKERHUB_USERNAME }}/likeservice:latest

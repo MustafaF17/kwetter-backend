@@ -42,4 +42,4 @@ jobs:
         context: ./
         file: KweetService_Dockerfile
         push: true
-        tags: ${{ secrets.DOCKERHUB_USERNAME }}/KweetService:latest
+        tags: ${{ secrets.DOCKERHUB_USERNAME }}/kweetservice:latest
