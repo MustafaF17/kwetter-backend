@@ -3,7 +3,7 @@ name: Build APIGateway
 on:
   push:
     paths:
-      - "APIGatewy/**"
+      - "APIGateway/**"
       - ".github/workflows/APIGateway.yml"
 
 env:
