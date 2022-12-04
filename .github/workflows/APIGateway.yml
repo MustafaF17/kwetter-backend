@@ -3,7 +3,7 @@ name: Build APIGateway
 on:
   push:
     paths:
-      - "OcelotAPIGateway/**"
+      - "APIGatewy/**"
       - ".github/workflows/APIGateway.yml"
 
 env:
