@@ -40,6 +40,6 @@ jobs:
       uses: docker/build-push-action@v2
       with:
         context: ./
-        file: Dockerfile_APIGateway
+        file: Ocelot_Dockerfile
         push: true
-        tags: ${{ secrets.DOCKERHUB_USERNAME }}/kwetter-api-gateway:latest
+        tags: ${{ secrets.DOCKERHUB_USERNAME }}/ocelot:latest
