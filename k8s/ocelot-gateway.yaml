@@ -1,0 +1,55 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ocelot-gateway
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ocelot-gateway
+  template:
+    metadata:
+      labels:
+        app: ocelot-gateway
+    spec:
+      nodeSelector:
+        "beta.kubernetes.io/os": linux
+      containers:
+      - name: ocelot-gateway
+        image: mustafa2x/ocelot:latest
+        resources:
+          requests:
+            cpu: 100m
+            memory: 128Mi
+          limits:
+            cpu: 250m
+            memory: 256Mi
+        ports:
+        - containerPort: 80
+          name: redis
+        imagePullPolicy: Always
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ocelot-gateway
+spec:
+  type: ClusterIP
+  ports:
+  - port: 80
+  selector:
+    app: ocelot-gateway
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ocelot-nodeport-srv
+spec:
+  type: NodePort
+  selector:
+    app:  ocelot-gateway
+  ports:
+    - name:  ocelot-gateway
+      protocol: TCP
+      port: 80
+      targetPort: 80
