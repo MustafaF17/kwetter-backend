@@ -33,17 +33,47 @@ namespace Kwetter.LikeService.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateLike(Like like)
+        public async Task<IActionResult> CreateLike([FromBody] int kweetId)
         {
-            var created = await _likeRepository.CreateLike(like);
-            return Ok(created);
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
+            var like = new Like();
+            like.UserId = Guid.Parse(HttpContext.Request.Headers["claims_id"]);
+            like.KweetId = kweetId;
+
+            await _likeRepository.CreateLike(like);
+            return Ok(like);
         }
 
         [HttpDelete("{likeId}")]
         public async Task<IActionResult> DeleteLike(int likeId)
         {
-            var deleted = await _likeRepository.DeleteLike(likeId);
-            return Ok(deleted);
+            //Check if tweet exists & tweet belongs to logged in user or admin
+            var likeDetails = await _likeRepository.GetLikeById(likeId);
+
+            Guid loggedUserId = Guid.Parse(HttpContext.Request.Headers["claims_id"]);
+
+            if (likeDetails != null && likeDetails.UserId == loggedUserId)
+            {
+
+                var unlike = await _likeRepository.DeleteLike(likeId);
+                return Ok(unlike);
+            }
+
+            else if (likeDetails == null)
+            {
+                return BadRequest("Like details does not exist");
+            }
+
+            else if (likeDetails.UserId != loggedUserId)
+            {
+                return BadRequest("Unauthorized to unlike tweet");
+            }
+
+            return BadRequest();
         }
 
         [HttpDelete("DeleteByKweet/{kweetId}")]

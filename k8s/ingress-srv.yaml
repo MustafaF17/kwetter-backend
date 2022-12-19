@@ -1,0 +1,33 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-srv
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/use-regex: 'true'
+spec:
+  rules:
+    - host: kwetter.com
+      http:
+        paths:
+          - path: /gateway/user
+            pathType: Prefix
+            backend:
+              service:
+                name: kwetter-userservice-srv
+                port:
+                  number: 80
+          - path: /gateway/kweet
+            pathType: Prefix
+            backend:
+              service:
+                name: kwetter-userservice-srv
+                port:
+                  number: 80
+          - path: /gateway/like
+            pathType: Prefix
+            backend:
+              service:
+                name: kwetter-likeservice-srv
+                port:
+                  number: 80

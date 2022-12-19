@@ -79,9 +79,9 @@ namespace Kwetter.KweetService.Controllers
 
             if (kweet != null && kweet.UserId == loggedUserId || kweet != null && loggedUserRole == "Admin")
             {
-                var KweetDto = new KweetDto();
-                KweetDto.Id = id;
-                KweetDto.Event = "KweetDeleted";
+                var KweetDto = new KweetDto(id,"KweetDeleted");
+                //KweetDto.Id = id;
+                //KweetDto.Event = "KweetDeleted";
 
                 var deleted = await _kweetRepository.DeleteKweet(id);
                 if (deleted)

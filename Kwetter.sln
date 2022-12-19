@@ -13,6 +13,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kwetter.LikeService", "Kwet
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{CBAD196B-7C71-4543-97B8-F688F39D7D40}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kwetter.KweetService.Test", "Tests\Kwetter.KweetService.Test\Kwetter.KweetService.Test.csproj", "{F6CDA00C-9AE3-44C0-9DF3-2C80C920CA70}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{CBAD196B-7C71-4543-97B8-F688F39D7D40}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CBAD196B-7C71-4543-97B8-F688F39D7D40}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CBAD196B-7C71-4543-97B8-F688F39D7D40}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F6CDA00C-9AE3-44C0-9DF3-2C80C920CA70}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F6CDA00C-9AE3-44C0-9DF3-2C80C920CA70}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F6CDA00C-9AE3-44C0-9DF3-2C80C920CA70}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F6CDA00C-9AE3-44C0-9DF3-2C80C920CA70}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
