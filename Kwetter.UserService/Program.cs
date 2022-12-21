@@ -2,7 +2,6 @@ using Kwetter.UserService.Data;
 using Kwetter.UserService.Repository;
 using Kwetter.UserService.Repository.Interface;
 using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -24,7 +23,7 @@ builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddDbContext<DataContext>(
     options =>
     {
-        options.UseInMemoryDatabase("UserInMemory");
+        options.UseSqlServer(builder.Configuration.GetConnectionString("Kwetter"));
     });
 
 builder.Services.Configure<IdentityOptions>(options =>

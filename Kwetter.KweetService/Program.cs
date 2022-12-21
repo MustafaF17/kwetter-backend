@@ -22,7 +22,7 @@ builder.Services.AddScoped<IMessageProducer, MessageProducer>();
 builder.Services.AddDbContext<DataContext>(
     options =>
     {
-        options.UseInMemoryDatabase("KweetInMemory");
+        options.UseSqlServer(builder.Configuration.GetConnectionString("Kwetter"));
     });
 
 var app = builder.Build();

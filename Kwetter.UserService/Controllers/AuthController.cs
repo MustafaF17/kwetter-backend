@@ -1,11 +1,7 @@
 ﻿using Kwetter.UserService.Dto;
 using Kwetter.UserService.Model;
 using Kwetter.UserService.Repository.Interface;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -45,12 +41,6 @@ namespace Kwetter.UserService.Controllers
             user.PasswordHash = passwordHash;
             user.PasswordSalt = passwordSalt;
             user.Role = "Guest";
-
-           //Testing purposes
-            if(registerDto.Username=="admin")
-            {
-                user.Role = "Admin";
-            }
 
             await _userRepository.CreateUser(user);
             return Ok(user);
@@ -118,18 +108,11 @@ namespace Kwetter.UserService.Controllers
 
         private string CreateToken(User user)
         {
-            var role = "Guest";
-
-            if(user.Role == "Admin")
-            {
-                role = "Admin";
-            }
 
             List<Claim> claims = new List<Claim>
             {
                 new Claim(ClaimTypes.Name, user.Username),
-                //new Claim(ClaimTypes.Role, role),
-                new Claim("Role", role),
+                new Claim("Role", user.Role),
                 new Claim("Id", user.Id.ToString())
             };
 

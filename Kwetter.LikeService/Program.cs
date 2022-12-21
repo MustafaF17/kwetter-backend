@@ -4,7 +4,6 @@ using Kwetter.LikeService.Events;
 using Kwetter.LikeService.Repository;
 using Kwetter.LikeService.Repository.Interface;
 using Microsoft.EntityFrameworkCore;
-using System.ComponentModel;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,14 +20,13 @@ builder.Services.AddScoped<ILikeRepository, LikeRepository>();
 
 builder.Services.AddHostedService<MessageBusSubscriber>();
 builder.Services.AddSingleton<IEventProcessor,EventProcessor>();
-builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 
 // Database configuration
 builder.Services.AddDbContext<DataContext>(
     options =>
     {
-        options.UseInMemoryDatabase("LikeInMemory");
+        options.UseSqlServer(builder.Configuration.GetConnectionString("Kwetter"));
     });
 
 var app = builder.Build();

@@ -11,7 +11,6 @@ namespace Kwetter.KweetService.Repository.Interface
         Task<List<Kweet>> GetKweetsByUser(Guid userId);      
         Task<bool> CreateKweet(Kweet kweet);
         Task<bool> DeleteKweet(int kweetId);
-        //Task<Kweet> GetFollowedUsersKweets(List<int> followingUsers);
 
         Task<bool> Save();
     }
