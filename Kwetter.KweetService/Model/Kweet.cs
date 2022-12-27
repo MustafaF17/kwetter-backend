@@ -14,6 +14,9 @@ namespace Kwetter.KweetService.Model
         public Guid UserId { get; set; }
 
         [Required]
+        public string Username { get; set; }
+
+        [Required]
         public string Text { get; set; }
         
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]

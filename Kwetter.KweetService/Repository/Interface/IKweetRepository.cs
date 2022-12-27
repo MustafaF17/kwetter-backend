@@ -12,6 +12,7 @@ namespace Kwetter.KweetService.Repository.Interface
         Task<bool> CreateKweet(Kweet kweet);
         Task<bool> DeleteKweet(int kweetId);
 
+
         Task<bool> Save();
     }
 }

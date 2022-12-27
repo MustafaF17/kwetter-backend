@@ -19,10 +19,16 @@ builder.Services.AddScoped<IFollowRepository, FollowRepository>();
 builder.Services.AddScoped<IMessageProducer, MessageProducer>();
 
 // Database configuration
+//builder.Services.AddDbContext<DataContext>(
+//    options =>
+//    {
+//        options.UseSqlServer(builder.Configuration.GetConnectionString("Kwetter"));
+//    });
+
 builder.Services.AddDbContext<DataContext>(
     options =>
     {
-        options.UseSqlServer(builder.Configuration.GetConnectionString("Kwetter"));
+        options.UseInMemoryDatabase("UserInMemory");
     });
 
 var app = builder.Build();

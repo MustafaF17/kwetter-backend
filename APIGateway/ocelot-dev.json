@@ -11,18 +11,6 @@
           "Port": 5079
         }
       ],
-      // Allow one request every 5 seconds, else rate limit 429
-
-      "RateLimitOptions": {
-        "ClientWhitelist": [],
-        "EnableRateLimiting": true,
-        "Period": "5s",
-        "PeriodTimespan": 1,
-        "Limit": 1
-      },
-
-      // Cache response
-      "FileCacheOptions": { "TtlSeconds": 10 }
 
     },
 
@@ -74,7 +62,8 @@
         "AllowedScopes": []
       },
       "AddHeadersToRequest": {
-        "claims_id": "Claims[Id] > value > |"
+        "claims_id": "Claims[Id] > value > |",
+        "claims_username": "Claims[Username] > value > |"
       }
     },
 

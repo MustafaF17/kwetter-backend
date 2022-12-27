@@ -60,7 +60,9 @@ namespace Kwetter.KweetService.Controllers
 
             var kweet = new Kweet();
             kweet.UserId = Guid.Parse(HttpContext.Request.Headers["claims_id"]);
+            kweet.Username = HttpContext.Request.Headers["claims_username"];
             kweet.Text = text;
+            kweet.Created = DateTime.Now;
 
             await _kweetRepository.CreateKweet(kweet);
             return Ok(kweet);
@@ -80,8 +82,6 @@ namespace Kwetter.KweetService.Controllers
             if (kweet != null && kweet.UserId == loggedUserId || kweet != null && loggedUserRole == "Admin")
             {
                 var KweetDto = new KweetDto(id,"KweetDeleted");
-                //KweetDto.Id = id;
-                //KweetDto.Event = "KweetDeleted";
 
                 var deleted = await _kweetRepository.DeleteKweet(id);
                 if (deleted)

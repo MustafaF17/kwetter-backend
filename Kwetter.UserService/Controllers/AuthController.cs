@@ -14,13 +14,11 @@ namespace Kwetter.UserService.Controllers
     [ApiController]
     public class AuthController : ControllerBase
     {
-        private readonly IConfiguration _configuration;
         private readonly IUserRepository _userRepository;
 
         public AuthController(IUserRepository userRepository, IConfiguration configuration)
         {
             _userRepository = userRepository ?? throw new ArgumentNullException(nameof(userRepository));
-            _configuration = configuration;
         }
 
 
@@ -113,7 +111,8 @@ namespace Kwetter.UserService.Controllers
             {
                 new Claim(ClaimTypes.Name, user.Username),
                 new Claim("Role", user.Role),
-                new Claim("Id", user.Id.ToString())
+                new Claim("Id", user.Id.ToString()),
+                new Claim("Username", user.Username)
             };
 
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("this is my custom Secret key for authentication"));

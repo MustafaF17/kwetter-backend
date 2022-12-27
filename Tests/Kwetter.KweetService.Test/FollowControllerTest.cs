@@ -9,6 +9,7 @@ using Kwetter.KweetService.Messaging;
 using Microsoft.AspNetCore.Mvc;
 using Kwetter.KweetService.Model;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Configuration;
 
 namespace Kwetter.KweetService.Test
 {
@@ -118,6 +119,7 @@ namespace Kwetter.KweetService.Test
 
             // Assert
             Assert.IsType<OkObjectResult>(result);
+
 
         }
 
