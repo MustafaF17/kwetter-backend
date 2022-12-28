@@ -45,7 +45,7 @@ kind: Service
 metadata:
   name: ocelot-nodeport-srv
 spec:
-  type: NodePort
+  type: LoadBalancer
   selector:
     app:  ocelot-gateway
   ports:

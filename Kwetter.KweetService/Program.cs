@@ -18,18 +18,18 @@ builder.Services.AddScoped<IKweetRepository, KweetRepository>();
 builder.Services.AddScoped<IFollowRepository, FollowRepository>();
 builder.Services.AddScoped<IMessageProducer, MessageProducer>();
 
-// Database configuration
-//builder.Services.AddDbContext<DataContext>(
-//    options =>
-//    {
-//        options.UseSqlServer(builder.Configuration.GetConnectionString("Kwetter"));
-//    });
-
+//Database configuration
 builder.Services.AddDbContext<DataContext>(
     options =>
     {
-        options.UseInMemoryDatabase("UserInMemory");
+        options.UseSqlServer(builder.Configuration.GetConnectionString("Kwetter"));
     });
+
+//builder.Services.AddDbContext<DataContext>(
+//    options =>
+//    {
+//        options.UseInMemoryDatabase("UserInMemory");
+//    });
 
 var app = builder.Build();
 
@@ -39,8 +39,6 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
-//app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
