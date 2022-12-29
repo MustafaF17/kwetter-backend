@@ -24,12 +24,12 @@ namespace Kwetter.LikeService.Controllers
             return Ok(like);
         }
 
-        [HttpGet("LikeByUser/{userId}")]
-        public async Task<IActionResult> GetLikesByUser(Guid userId)
+        [HttpGet("GetUserLikes")]
+        public async Task<IActionResult> GetUserLikes()
         {
-            List<Like> likes = await _likeRepository.GetLikesByUser(userId);
-            return Ok(likes);
-
+                var UserId = Guid.Parse(HttpContext.Request.Headers["claims_id"]);
+                List<Like> likes = await _likeRepository.GetLikesByUser(UserId);
+                return Ok(likes);
         }
 
         [HttpPost]

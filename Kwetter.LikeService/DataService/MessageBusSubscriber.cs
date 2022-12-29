@@ -28,7 +28,7 @@ namespace Kwetter.LikeService.DataService
             {
                 HostName = "whale-01.rmq.cloudamqp.com",
                 UserName = "ttdabobe",
-                Password = "3kzU387HHnD-TDPzLSO_4yurAKCxrbQo",
+                Password = "2Fx5QundhYgVLYeKrEaIUhCeiXh_OE5J",
                 VirtualHost = "ttdabobe"
             };
 
