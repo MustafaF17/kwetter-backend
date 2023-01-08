@@ -114,16 +114,8 @@
         }
       ],
 
-      "RateLimitOptions": {
-        "ClientWhitelist": [],
-        "EnableRateLimiting": true,
-        "Period": "1s",
-        "PeriodTimespan": 1,
-        "Limit": 200
-      }
+      "FileCacheOptions": { "TtlSeconds": 10 }
 
-      // Cache response
-      //"FileCacheOptions": { "TtlSeconds": 1 }
     },
 
     //2.4 Get feed from followers
