@@ -32,7 +32,7 @@ namespace Kwetter.KweetService.Controllers
 
         }
 
-        [HttpPost]
+        [HttpPost("follow")]
         public async Task<IActionResult> Follow([FromBody] Guid user)
         {
             if (!ModelState.IsValid)
@@ -40,12 +40,42 @@ namespace Kwetter.KweetService.Controllers
                 return BadRequest();
             }
 
+
+
             var follow = new Follow();
             follow.UserId = Guid.Parse(HttpContext.Request.Headers["claims_id"]);
             follow.FollowingUserId = user;
 
-            await _followRepository.FollowUser(follow);
-            return Ok(follow);
+            if(!await _followRepository.IsFollowing(follow.UserId, follow.FollowingUserId))
+            {
+                await _followRepository.FollowUser(follow);
+                return Ok(follow);
+
+            }
+
+            return BadRequest("Already following user");
+           
+        }
+
+
+        [HttpDelete("unfollow")]
+        public async Task<IActionResult> UnfollowByGuid([FromBody] Guid requestFollowUserId)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
+            var userId = Guid.Parse(HttpContext.Request.Headers["claims_id"]);
+
+            if (await _followRepository.IsFollowing(userId, requestFollowUserId))
+            {
+               return Ok(await _followRepository.UnfollowByUserGuid(userId,requestFollowUserId));
+
+            }
+
+            return BadRequest("Not following user");
+
         }
 
         [HttpDelete("{id}")]
@@ -60,7 +90,7 @@ namespace Kwetter.KweetService.Controllers
             if (followDetails != null && followDetails.UserId == loggedUserId)
             {
         
-                var unfollow = await _followRepository.UnfollowUser(id);
+                var unfollow = await _followRepository.UnfollowUserById(id);
                 return Ok(unfollow);
             }
 
@@ -71,7 +101,7 @@ namespace Kwetter.KweetService.Controllers
 
             else if (followDetails.UserId != loggedUserId)
             {
-                return BadRequest("Unauthorized to delete tweet");
+                return BadRequest("Unauthorized to unfollow user");
             }
 
             return BadRequest();

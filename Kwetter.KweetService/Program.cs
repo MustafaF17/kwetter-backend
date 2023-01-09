@@ -28,7 +28,7 @@ builder.Services.AddDbContext<DataContext>(
 //builder.Services.AddDbContext<DataContext>(
 //    options =>
 //    {
-//        options.UseInMemoryDatabase("UserInMemory");
+//        options.UseInMemoryDatabase("KwetterInMemory");
 //    });
 
 var app = builder.Build();

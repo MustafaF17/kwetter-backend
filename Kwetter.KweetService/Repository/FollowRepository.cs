@@ -26,9 +26,9 @@ namespace Kwetter.KweetService.Repository
             return await Save();
         }
 
-        public async Task<bool> UnfollowUser(int followId)
+        public async Task<bool> UnfollowUserById(int followId)
         {
-            Follow followDetails = _context.Follows.FirstOrDefault(x => x.Id == followId);
+            Follow followDetails = await _context.Follows.FirstOrDefaultAsync(x => x.Id == followId);
             if (followDetails != null)
             {
                 _context.Follows.Remove(followDetails);
@@ -48,6 +48,31 @@ namespace Kwetter.KweetService.Repository
             return await _context.Follows.Where(p => p.UserId == userId).ToListAsync();
         }
 
+        public async Task<bool> IsFollowing(Guid userId, Guid followingUser)
+        {
+            Follow followDetails = await _context.Follows.FirstOrDefaultAsync(x => x.UserId == userId && x.FollowingUserId == followingUser);
+            if (followDetails != null)
+                return true;
+
+            else
+            {
+                return false;
+            }
+        }
+
+        public async Task<bool> UnfollowByUserGuid(Guid userId, Guid followingUser)
+        {
+            Follow followDetails = await _context.Follows.FirstOrDefaultAsync(x => x.UserId == userId && x.FollowingUserId == followingUser);
+            if (followDetails != null)
+            {
+                _context.Follows.Remove(followDetails);
+                return await Save();
+            }
+
+            return false;
+            
+        }
+
         public async Task<bool> Save()
         {
             int saved = await _context.SaveChangesAsync();
@@ -55,6 +80,6 @@ namespace Kwetter.KweetService.Repository
             return false;
         }
 
-       
+      
     }
 }

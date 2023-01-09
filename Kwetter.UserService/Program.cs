@@ -19,12 +19,18 @@ builder.Services.AddSwaggerGen();
 // Services dependency
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 
-// Database configuration
+//Database configuration
 builder.Services.AddDbContext<DataContext>(
     options =>
     {
         options.UseSqlServer(builder.Configuration.GetConnectionString("Kwetter"));
     });
+
+//builder.Services.AddDbContext<DataContext>(
+//    options =>
+//    {
+//        options.UseInMemoryDatabase("UserInMemory");
+//    });
 
 builder.Services.Configure<IdentityOptions>(options =>
     options.ClaimsIdentity.UserIdClaimType = ClaimTypes.NameIdentifier);
