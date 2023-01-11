@@ -145,7 +145,7 @@
         "Period": "1s",
         "PeriodTimespan": 1,
         "Limit": 200
-      },
+      }
 
       // Cache response
       //"FileCacheOptions": { "TtlSeconds": 1 }
