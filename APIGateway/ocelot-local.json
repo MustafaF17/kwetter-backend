@@ -112,9 +112,9 @@
           "Host": "localhost",
           "Port": 5105
         }
-      ],
+      ]
 
-     // "FileCacheOptions": { "TtlSeconds": 10 }
+      // "FileCacheOptions": { "TtlSeconds": 10 }
 
     },
 
@@ -323,3 +323,16 @@
     }
   }
 }
+
+
+//"Host": "kwetter-userservice-srv",
+//"Port": 80
+//Local port: 5079
+
+//"Host": "kwetter-kweetservice-srv",
+//"Port": 80
+//Local port: 5105
+
+//"Host": "kwetter-likeservice-srv",
+//"Port": 80
+//Local port:5019

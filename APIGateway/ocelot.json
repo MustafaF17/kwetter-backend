@@ -22,7 +22,7 @@
       },
 
       // Cache response
-      "FileCacheOptions": { "TtlSeconds": 10 }
+      "FileCacheOptions": { "TtlSeconds": 2 }
 
     },
 
@@ -112,9 +112,9 @@
           "Host": "kwetter-kweetservice-srv",
           "Port": 80
         }
-      ],
+      ]
 
-      "FileCacheOptions": { "TtlSeconds": 10 }
+      // "FileCacheOptions": { "TtlSeconds": 10 }
 
     },
 
@@ -141,14 +141,14 @@
 
       "RateLimitOptions": {
         "ClientWhitelist": [],
-        "EnableRateLimiting": true,
+        "EnableRateLimiting": false,
         "Period": "1s",
         "PeriodTimespan": 1,
         "Limit": 200
       },
 
       // Cache response
-      "FileCacheOptions": { "TtlSeconds": 1 }
+      //"FileCacheOptions": { "TtlSeconds": 1 }
     },
 
     // 2.4 Get tweet by id
@@ -183,9 +183,9 @@
 
     // 3.1 Follow user
     {
-      "UpstreamPathTemplate": "/gateway/follow",
+      "UpstreamPathTemplate": "/gateway/follow/follow",
       "UpstreamHttpMethod": [ "Post" ],
-      "DownstreamPathTemplate": "/api/follow",
+      "DownstreamPathTemplate": "/api/follow/follow",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
@@ -204,9 +204,9 @@
 
     //3.2 Unfollow user
     {
-      "UpstreamPathTemplate": "/gateway/follow/{id}",
+      "UpstreamPathTemplate": "/gateway/follow/unfollow",
       "UpstreamHttpMethod": [ "Delete" ],
-      "DownstreamPathTemplate": "/api/follow/{id}",
+      "DownstreamPathTemplate": "/api/follow/unfollow",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
@@ -323,3 +323,16 @@
     }
   }
 }
+
+
+//"Host": "kwetter-userservice-srv",
+//"Port": 80
+//Local port: 5079
+
+//"Host": "kwetter-kweetservice-srv",
+//"Port": 80
+//Local port: 5105
+
+//"Host": "kwetter-likeservice-srv",
+//"Port": 80
+//Local port:5019

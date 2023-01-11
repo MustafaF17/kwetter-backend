@@ -24,7 +24,7 @@ namespace Kwetter.KweetService.Test
 
         #endregion
 
-
+        #region Constructors
 
         public FollowControllerTest()
         {
@@ -34,9 +34,6 @@ namespace Kwetter.KweetService.Test
 
             _followController = new FollowController(serviceProvider.GetService<IFollowRepository>());
         }
-
-        #region Constructors
-
 
 
         #endregion
