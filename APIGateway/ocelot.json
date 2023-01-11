@@ -256,7 +256,7 @@
     {
       "UpstreamPathTemplate": "/gateway/like/likebyuser",
       "UpstreamHttpMethod": [ "Get" ],
-      "DownstreamPathTemplate": "/api/like/likebyuser/",
+      "DownstreamPathTemplate": "/api/like/likebyuser",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
