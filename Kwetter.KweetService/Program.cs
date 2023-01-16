@@ -1,4 +1,6 @@
 using Kwetter.KweetService.Data;
+using Kwetter.KweetService.DataService;
+using Kwetter.KweetService.Events;
 using Kwetter.KweetService.Messaging;
 using Kwetter.KweetService.Repository;
 using Kwetter.KweetService.Repository.Interface;
@@ -16,7 +18,11 @@ builder.Services.AddSwaggerGen();
 // Services dependency
 builder.Services.AddScoped<IKweetRepository, KweetRepository>();
 builder.Services.AddScoped<IFollowRepository, FollowRepository>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IMessageProducer, MessageProducer>();
+
+builder.Services.AddHostedService<MessageBusSubscriber>();
+builder.Services.AddSingleton<IEventProcessor, EventProcessor>();
 
 //Database configuration
 builder.Services.AddDbContext<DataContext>(

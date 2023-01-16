@@ -2,6 +2,7 @@ using Microsoft.IdentityModel.Tokens;
 using Ocelot.Cache.CacheManager;
 using Ocelot.DependencyInjection;
 using Ocelot.Middleware;
+using Ocelot.Provider.Consul;
 using Ocelot.Provider.Kubernetes;
 using Ocelot.Values;
 using System.Text;
@@ -23,7 +24,7 @@ builder.Services.AddCors(options =>
 });
 
 builder.Configuration.SetBasePath(builder.Environment.ContentRootPath)
-    .AddJsonFile("ocelot.json", optional: false, reloadOnChange: true)
+    .AddJsonFile("ocelot-dev.json", optional: false, reloadOnChange: true)
     .AddEnvironmentVariables();
 
 

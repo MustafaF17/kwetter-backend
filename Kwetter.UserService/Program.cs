@@ -1,4 +1,5 @@
 using Kwetter.UserService.Data;
+using Kwetter.UserService.Messaging;
 using Kwetter.UserService.Repository;
 using Kwetter.UserService.Repository.Interface;
 using Microsoft.AspNetCore.Authentication;
@@ -18,6 +19,7 @@ builder.Services.AddSwaggerGen();
 
 // Services dependency
 builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IMessageProducer, MessageProducer>();
 
 //Database configuration
 builder.Services.AddDbContext<DataContext>(

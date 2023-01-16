@@ -38,6 +38,20 @@ namespace Kwetter.KweetService.Migrations
                 {
                     table.PrimaryKey("PK_Kweets", x => x.Id);
                 });
+
+            migrationBuilder.CreateTable(
+                name: "UserKweet",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Username = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Role = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    EventType = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UserKweet", x => x.Id);
+                });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -47,6 +61,9 @@ namespace Kwetter.KweetService.Migrations
 
             migrationBuilder.DropTable(
                 name: "Kweets");
+
+            migrationBuilder.DropTable(
+                name: "UserKweet");
         }
     }
 }

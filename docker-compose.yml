@@ -1,17 +1,17 @@
 version: '3.4'
 
 services:
-  apigateway:
-    image: ${DOCKER_REGISTRY-}apigateway
-    build:
-      context: .
-      dockerfile: APIGateway/Dockerfile
-
   kwetter.kweetservice:
     image: ${DOCKER_REGISTRY-}kwetterkweetservice
     build:
       context: .
       dockerfile: Kwetter.KweetService/Dockerfile
+
+  apigateway:
+    image: ${DOCKER_REGISTRY-}apigateway
+    build:
+      context: .
+      dockerfile: APIGateway/Dockerfile
 
 
   kwetter.likeservice:

@@ -1,3 +1,4 @@
+using Consul;
 using Kwetter.LikeService.Data;
 using Kwetter.LikeService.DataService;
 using Kwetter.LikeService.Events;
@@ -6,6 +7,24 @@ using Kwetter.LikeService.Repository.Interface;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
+
+
+var client = new ConsulClient();
+//var registration = new AgentServiceRegistration()
+//{
+//    ID = "likeservice",
+//    Name = "Kwetter Like Service",
+//    Address = "http://localhost",
+//    Port = 5019,
+//    Check = new AgentServiceCheck()
+//    {
+//        HTTP = "http://localhost:5019/health",
+//        Interval = TimeSpan.FromSeconds(30)
+//    }
+//};
+
+//client.Agent.ServiceRegister(registration).Wait();
+
 
 // Add services to the container.
 
@@ -38,8 +57,11 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+
 app.UseAuthorization();
 
 app.MapControllers();
 
 app.Run();
+
+client.Agent.ServiceDeregister("likeservice").Wait();

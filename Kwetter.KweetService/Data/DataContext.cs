@@ -1,4 +1,5 @@
-﻿using Kwetter.KweetService.Model;
+﻿using Kwetter.KweetService.Dto;
+using Kwetter.KweetService.Model;
 using Microsoft.EntityFrameworkCore;
 
 namespace Kwetter.KweetService.Data
@@ -14,6 +15,7 @@ namespace Kwetter.KweetService.Data
 
         public virtual DbSet<Kweet> Kweets { get; set; }
         public virtual DbSet<Follow> Follows { get; set; }
+        public virtual DbSet<UserDto> UserKweet { get; set; }
 
 
     }

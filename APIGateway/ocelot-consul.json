@@ -1,0 +1,41 @@
+﻿{
+  "ReRoutes": [
+    {
+      "DownstreamPathTemplate": "/api/kweet/{everything}",
+      "DownstreamScheme": "http",
+      "ServiceName": "kweet-service",
+      "UpstreamPathTemplate": "/api/kweet/{everything}",
+      "UpstreamHttpMethod": [ "Get", "Post", "Delete" ],
+      "LoadBalancerOptions": {
+        "Type": "LeastConnection"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/like/{everything}",
+      "DownstreamScheme": "http",
+      "ServiceName": "like-service",
+      "UpstreamPathTemplate": "/api/like/{everything}",
+      "UpstreamHttpMethod": [ "Get", "Post", "Delete" ],
+      "LoadBalancerOptions": {
+        "Type": "LeastConnection"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/user/{everything}",
+      "DownstreamScheme": "http",
+      "ServiceName": "user-service",
+      "UpstreamPathTemplate": "/api/user/{everything}",
+      "UpstreamHttpMethod": [ "Get", "Post", "Delete" ],
+      "LoadBalancerOptions": {
+        "Type": "LeastConnection"
+      }
+    }
+  ],
+  "GlobalConfiguration": {
+    "ServiceDiscoveryProvider": {
+      "Host": "localhost",
+      "Port": 8500,
+      "Type": "Consul"
+    }
+  }
+}
