@@ -10,20 +10,20 @@ var builder = WebApplication.CreateBuilder(args);
 
 
 var client = new ConsulClient();
-//var registration = new AgentServiceRegistration()
-//{
-//    ID = "likeservice",
-//    Name = "Kwetter Like Service",
-//    Address = "http://localhost",
-//    Port = 5019,
-//    Check = new AgentServiceCheck()
-//    {
-//        HTTP = "http://localhost:5019/health",
-//        Interval = TimeSpan.FromSeconds(30)
-//    }
-//};
+var registration = new AgentServiceRegistration()
+{
+    ID = "likeservice",
+    Name = "Kwetter Like Service",
+    Address = "http://localhost",
+    Port = 5019,
+    Check = new AgentServiceCheck()
+    {
+        HTTP = "http://localhost:5019/health",
+        Interval = TimeSpan.FromSeconds(30)
+    }
+};
 
-//client.Agent.ServiceRegister(registration).Wait();
+client.Agent.ServiceRegister(registration).Wait();
 
 
 // Add services to the container.

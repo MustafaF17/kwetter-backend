@@ -16,49 +16,27 @@ namespace Kwetter.KweetService.Events
 
         public void ProcessEvent(string message)
         {
-            var eventType = DetermineEvent(message);
-
-            switch (eventType)
-            {
-                case EventType.UserCreated:
-                    CreateUserToKweetService(message);
-                    break;
-                case EventType.Undefined:
-                    break;
-                default:
-                    break;
-            }
+            CreateFollowToKweetService(message);
         }
 
-        private EventType DetermineEvent(string notificationMessage)
-        {
-            Console.WriteLine("Determining Event --->");
 
-            var eventType = JsonSerializer.Deserialize<UserDto>(notificationMessage);
 
-            switch (eventType.EventType)
-            {
-                case "UserCreated":
-                    Console.WriteLine("User Created Event Detected");
-                    return EventType.UserCreated;
-                default:
-                    Console.WriteLine("Could not determine event type");
-                    return EventType.Undefined;
-            }
-        }
-
-        private void CreateUserToKweetService(string userMessage)
+        private void CreateFollowToKweetService(string message)
         {
             using (var scope = _scopeFactory.CreateScope())
             {
-                var repo = scope.ServiceProvider.GetRequiredService<IUserRepository>();
+                var repo = scope.ServiceProvider.GetRequiredService<IFollowRepository>();
 
-                var userDto = JsonSerializer.Deserialize<UserDto>(userMessage);
-                Console.WriteLine(userMessage);
+                var followDto = JsonSerializer.Deserialize<FollowDto>(message);
+
+                Follow follow = new Follow();
+                follow.FollowingUserId = followDto.FollowingUserId;
+                follow.UserId = followDto.UserId;
+                Console.WriteLine(message);
 
                 try
                 {
-                    repo.CreateUser(userDto);
+                    repo.FollowUser(follow);
                 }
                 catch (Exception ex)
                 {
@@ -71,7 +49,7 @@ namespace Kwetter.KweetService.Events
 
     enum EventType
     {
-        UserCreated,
+        FollowCreated,
         Undefined
     }
 }

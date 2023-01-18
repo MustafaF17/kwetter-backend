@@ -1,3 +1,4 @@
+using Consul;
 using Kwetter.UserService.Data;
 using Kwetter.UserService.Messaging;
 using Kwetter.UserService.Repository;
@@ -9,6 +10,20 @@ using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
 
 var builder = WebApplication.CreateBuilder(args);
+
+var client = new ConsulClient();
+var registration = new AgentServiceRegistration()
+{
+    ID = "userservice",
+    Name = "Kwetter User Service",
+    Address = "http://localhost",
+    Port = 5079,
+    Check = new AgentServiceCheck()
+    {
+        HTTP = "http://localhost:5019/health",
+        Interval = TimeSpan.FromSeconds(30)
+    }
+};
 
 // Add services to the container.
 
@@ -54,3 +69,5 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+
+client.Agent.ServiceDeregister("userservice").Wait();

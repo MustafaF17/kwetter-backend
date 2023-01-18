@@ -38,7 +38,7 @@ namespace Kwetter.KweetService.DataService
             _queueName = _channel.QueueDeclare().QueueName;
             _channel.QueueBind(queue: _queueName,
                 exchange: "trigger",
-                routingKey: "user");
+                routingKey: "follow");
 
 
 

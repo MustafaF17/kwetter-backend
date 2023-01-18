@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 
-namespace Kwetter.KweetService.Dto
+namespace Kwetter.UserService.Dto
 {
     public class UserDto
     {

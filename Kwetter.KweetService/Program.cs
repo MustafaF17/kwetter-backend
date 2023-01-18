@@ -1,3 +1,4 @@
+using Consul;
 using Kwetter.KweetService.Data;
 using Kwetter.KweetService.DataService;
 using Kwetter.KweetService.Events;
@@ -7,6 +8,20 @@ using Kwetter.KweetService.Repository.Interface;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
+
+var client = new ConsulClient();
+var registration = new AgentServiceRegistration()
+{
+    ID = "kweetservice",
+    Name = "Kwetter Kweet Service",
+    Address = "http://localhost",
+    Port = 5105,
+    Check = new AgentServiceCheck()
+    {
+        HTTP = "http://localhost:5019/health",
+        Interval = TimeSpan.FromSeconds(30)
+    }
+};
 
 // Add services to the container.
 
@@ -18,7 +33,6 @@ builder.Services.AddSwaggerGen();
 // Services dependency
 builder.Services.AddScoped<IKweetRepository, KweetRepository>();
 builder.Services.AddScoped<IFollowRepository, FollowRepository>();
-builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IMessageProducer, MessageProducer>();
 
 builder.Services.AddHostedService<MessageBusSubscriber>();
@@ -51,3 +65,5 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+
+client.Agent.ServiceDeregister("kweetservice").Wait();

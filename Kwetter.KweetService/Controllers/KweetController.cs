@@ -11,12 +11,10 @@ namespace Kwetter.KweetService.Controllers
     public class KweetController : ControllerBase
     {
         private readonly IKweetRepository _kweetRepository;
-        private readonly IMessageProducer _messageProducer;
 
-        public KweetController(IKweetRepository kweetRepository, IMessageProducer messageProducer)
+        public KweetController(IKweetRepository kweetRepository)
         {
             _kweetRepository = kweetRepository ?? throw new ArgumentNullException(nameof(kweetRepository));
-            _messageProducer = messageProducer ?? throw new ArgumentNullException(nameof(_messageProducer));
         }
 
         [HttpGet("Feed")]
@@ -67,41 +65,6 @@ namespace Kwetter.KweetService.Controllers
             await _kweetRepository.CreateKweet(kweet);
             return Ok(kweet);
         }
-
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteKweet(int id)
-        {
-            //Check if tweet exists & tweet belongs to logged in user or admin
-            var kweet = await _kweetRepository.GetKweetById(id);
-
-            Guid loggedUserId = Guid.Parse(HttpContext.Request.Headers["claims_id"]);
-            var loggedUserRole = HttpContext.Request.Headers["claims_role"];
-
-
-
-            if (kweet != null && kweet.UserId == loggedUserId || kweet != null && loggedUserRole == "Admin")
-            {
-                var KweetDto = new KweetDto(id,"KweetDeleted");
-
-                var deleted = await _kweetRepository.DeleteKweet(id);
-                if (deleted)
-                    _messageProducer.SendingMessage<KweetDto>(KweetDto);
-                return Ok(deleted);
-            }
-
-            else if (kweet == null)
-            {
-                return BadRequest("Kweet does not exist");
-            }
-
-            else if (kweet.UserId != loggedUserId)
-            {
-                return BadRequest("Unauthorized to delete tweet");
-            }
-
-            return BadRequest();
-        }
-
 
     }
 }

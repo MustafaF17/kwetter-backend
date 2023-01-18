@@ -1,8 +1,8 @@
-﻿using Kwetter.KweetService.Model;
-using Kwetter.KweetService.Repository.Interface;
+﻿using Kwetter.UserService.Model;
+using Kwetter.UserService.Repository.Interface;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Kwetter.KweetService.Controllers
+namespace Kwetter.UserService.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -46,7 +46,7 @@ namespace Kwetter.KweetService.Controllers
             follow.UserId = Guid.Parse(HttpContext.Request.Headers["claims_id"]);
             follow.FollowingUserId = user;
 
-            if(!await _followRepository.IsFollowing(follow.UserId, follow.FollowingUserId))
+            if (!await _followRepository.IsFollowing(follow.UserId, follow.FollowingUserId))
             {
                 await _followRepository.FollowUser(follow);
                 return Ok(follow);
@@ -54,7 +54,7 @@ namespace Kwetter.KweetService.Controllers
             }
 
             return BadRequest("Already following user");
-           
+
         }
 
 
@@ -70,7 +70,7 @@ namespace Kwetter.KweetService.Controllers
 
             if (await _followRepository.IsFollowing(userId, requestFollowUserId))
             {
-               return Ok(await _followRepository.UnfollowByUserGuid(userId,requestFollowUserId));
+                return Ok(await _followRepository.UnfollowByUserGuid(userId, requestFollowUserId));
 
             }
 
@@ -81,7 +81,7 @@ namespace Kwetter.KweetService.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> Unfollow(int id)
         {
-            //Check if tweet exists & tweet belongs to logged in user or admin
+            //Check if tweet exists
             var followDetails = await _followRepository.GetFollowDetailsById(id);
 
             Guid loggedUserId = Guid.Parse(HttpContext.Request.Headers["claims_id"]);
@@ -89,7 +89,7 @@ namespace Kwetter.KweetService.Controllers
 
             if (followDetails != null && followDetails.UserId == loggedUserId)
             {
-        
+
                 var unfollow = await _followRepository.UnfollowUserById(id);
                 return Ok(unfollow);
             }

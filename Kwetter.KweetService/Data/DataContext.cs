@@ -15,8 +15,6 @@ namespace Kwetter.KweetService.Data
 
         public virtual DbSet<Kweet> Kweets { get; set; }
         public virtual DbSet<Follow> Follows { get; set; }
-        public virtual DbSet<UserDto> UserKweet { get; set; }
-
 
     }
 }
