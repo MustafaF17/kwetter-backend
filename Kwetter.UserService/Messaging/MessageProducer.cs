@@ -30,7 +30,7 @@ namespace Kwetter.UserService.Messaging
                 _connection = factory.CreateConnection();
                 _channel = _connection.CreateModel();
                 _channel.ExchangeDeclare(exchange: "trigger", type: ExchangeType.Direct);
-                _channel.QueueDeclare("user", exclusive: false);
+                _channel.QueueDeclare("follow", exclusive: false);
                 //_connection.ConnectionShutdown += RabbitMQ_ConnectionShutdown;
 
                 Console.WriteLine("--> Connected to MessageBus");
@@ -48,7 +48,7 @@ namespace Kwetter.UserService.Messaging
             Console.WriteLine("--> RabbitMQ Connection Open, sending message...");
             var json = JsonConvert.SerializeObject(message);
             var body = Encoding.UTF8.GetBytes(json);
-            _channel.BasicPublish(exchange: "trigger", routingKey: "user", body: body);
+            _channel.BasicPublish(exchange: "trigger", routingKey: "follow", body: body);
 
 
 

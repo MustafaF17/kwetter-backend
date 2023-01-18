@@ -21,7 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Kwetter.LikeService\Kwetter.LikeService.csproj" />
+    <ProjectReference Include="..\..\Kwetter.LikeService\Kwetter.LikeService.csproj" />
   </ItemGroup>
 
 </Project>

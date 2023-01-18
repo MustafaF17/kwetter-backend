@@ -15,9 +15,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kwetter.KweetService.Test",
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{CD241760-0F4D-4DD6-93CD-73CD6A87AFD0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kwetter.UserService.Test", "..\Kwetter.UserService.Test\Kwetter.UserService.Test.csproj", "{06E4B41F-9407-4905-B58F-2F550E94CA23}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kwetter.LikeService.Test", "Tests\Kwetter.LikeService.Test\Kwetter.LikeService.Test.csproj", "{3C070376-1C38-4706-A1CF-307CA99465C4}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kwetter.UserService.Test", "Tests\Kwetter.UserService.Test\Kwetter.UserService.Test.csproj", "{F45C6858-A950-48AB-90F7-A67A6C414AE1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -49,14 +49,14 @@ Global
 		{CD241760-0F4D-4DD6-93CD-73CD6A87AFD0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CD241760-0F4D-4DD6-93CD-73CD6A87AFD0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CD241760-0F4D-4DD6-93CD-73CD6A87AFD0}.Release|Any CPU.Build.0 = Release|Any CPU
-		{06E4B41F-9407-4905-B58F-2F550E94CA23}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{06E4B41F-9407-4905-B58F-2F550E94CA23}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{06E4B41F-9407-4905-B58F-2F550E94CA23}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{06E4B41F-9407-4905-B58F-2F550E94CA23}.Release|Any CPU.Build.0 = Release|Any CPU
 		{3C070376-1C38-4706-A1CF-307CA99465C4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{3C070376-1C38-4706-A1CF-307CA99465C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3C070376-1C38-4706-A1CF-307CA99465C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3C070376-1C38-4706-A1CF-307CA99465C4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F45C6858-A950-48AB-90F7-A67A6C414AE1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F45C6858-A950-48AB-90F7-A67A6C414AE1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F45C6858-A950-48AB-90F7-A67A6C414AE1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F45C6858-A950-48AB-90F7-A67A6C414AE1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

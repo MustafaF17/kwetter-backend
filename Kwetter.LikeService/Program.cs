@@ -23,8 +23,6 @@ var registration = new AgentServiceRegistration()
     }
 };
 
-client.Agent.ServiceRegister(registration).Wait();
-
 
 // Add services to the container.
 

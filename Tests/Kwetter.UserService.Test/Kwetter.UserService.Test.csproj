@@ -21,7 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\kwetter-backend\Kwetter.UserService\Kwetter.UserService.csproj" />
+    <ProjectReference Include="..\..\Kwetter.UserService\Kwetter.UserService.csproj" />
   </ItemGroup>
 
 </Project>
