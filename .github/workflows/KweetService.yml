@@ -55,9 +55,9 @@ jobs:
         password: ${{ secrets.AZ_SP_CLIENT_SECRET }}
 
     - name: Build Docker image
-      run: docker-compose build
+      run: docker build
 
     - name: Push Docker image to Azure Container Registry
       run: |
-          docker tag kweetservice:latest ${{ secrets.ACR_REGISTRY_NAME }}.azurecr.io/kweetservice:${{ github.sha }}
+          docker tag kweetservice ${{ secrets.ACR_REGISTRY_NAME }}.azurecr.io/kweetservice:${{ github.sha }}
           docker push ${{ secrets.ACR_REGISTRY_NAME }}.azurecr.io/kweetservice:${{ github.sha }}            
