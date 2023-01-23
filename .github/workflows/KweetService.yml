@@ -8,7 +8,6 @@ on:
 
 env:
   PROJECT_PATH: 'Kwetter.KweetService/Kwetter.KweetService.csproj'
-  IMAGE_NAME: kweetservice
 
 jobs:
   build:
@@ -48,22 +47,17 @@ jobs:
         push: true
         tags: ${{ secrets.DOCKERHUB_USERNAME }}/kweetservice:latest
         
-        
-    - name: Checkout repository
-      uses: actions/checkout@v2
-    - name: Get tag
-      id: tag
-      uses: dawidd6/action-get-tag@v1
-    - name: Log into registry
-      uses: docker/login-action@v1
+    - name: Login to Azure Container Registry
+      uses: azure/docker-login@v1
       with:
-        registry: ${{ secrets.ACR_ENDPOINT }}
-        username: ${{ secrets.ACR_USERNAME }}
-        password: ${{ secrets.ACR_PASSWORD }}
-    - name: Build & Push
-      uses: docker/build-push-action@v2
-      with:
-        push: true
-        build-args: |
-          version=${{ steps.tag.outputs.tag }}
-          tags: ${{ secrets.ACR_ENDPOINT }}/${{ env.IMAGE_NAME }}:${{ steps.tag.outputs.tag }}
+        login-server: ${{ secrets.ACR_REGISTRY_NAME }}.azurecr.io
+        username: ${{ secrets.AZ_SP_CLIENT_ID }}
+        password: ${{ secrets.AZ_SP_CLIENT_SECRET }}
+
+    - name: Build Docker image
+      run: docker-compose build
+
+    - name: Push Docker image to Azure Container Registry
+      run: |
+          docker tag kweetservice:latest ${{ secrets.ACR_REGISTRY_NAME }}.azurecr.io/kweetservice:${{ github.sha }}
+          docker push ${{ secrets.ACR_REGISTRY_NAME }}.azurecr.io/kweetservice:${{ github.sha }}            
