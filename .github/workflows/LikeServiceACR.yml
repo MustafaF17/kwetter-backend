@@ -4,7 +4,7 @@ on:
   push:
     paths:
       - "Kwetter.LikeService/**"
-      - ".github/workflows/LikeServiceeACR.yml"
+      - ".github/workflows/LikeServiceACR.yml"
 
 jobs:
   build:
