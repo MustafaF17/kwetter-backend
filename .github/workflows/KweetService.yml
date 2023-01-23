@@ -47,16 +47,13 @@ jobs:
         push: true
         tags: ${{ secrets.DOCKERHUB_USERNAME }}/kweetservice:latest
         
-    - name: Login to Azure Container Registry
-      uses: azure/docker-login@v1
+    - name: Login Azure Container Registery and Push Docker Image    
+    - uses: actions/checkout@v2
+    - uses: azure/docker-login@v1
       with:
-        login-server: ${{ secrets.ACR_REGISTRY_NAME }}.azurecr.io
+        login-server: kwettercontainerregistery.azurecr.io
         username: ${{ secrets.AZ_SP_CLIENT_ID }}
         password: ${{ secrets.AZ_SP_CLIENT_SECRET }}
-
-    - name: Build Docker image
-      run: docker-compose build
-
-    - name: Push Docker image to Azure Container Registry
-      run: |
-          docker push ${{ secrets.ACR_REGISTRY_NAME }}.azurecr.io/kweetservice:${{ github.sha }}            
+    - run: |
+        docker build . -t kwettercontainerregistery.azurecr.io/kweetservice:${{ github.sha }}
+        docker push kwettercontainerregistery.azurecr.io/kweetservice:${{ github.sha }}
