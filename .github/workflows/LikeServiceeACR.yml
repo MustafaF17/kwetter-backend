@@ -1,0 +1,24 @@
+name: Push Image to ACR 
+
+on:
+  push:
+    paths:
+      - "Kwetter.LikeService/**"
+      - ".github/workflows/LikeServiceeACR.yml"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
+    steps:
+    - uses: actions/checkout@v2
+    - uses: azure/docker-login@v1
+      with:
+        login-server: kwettercontainerregistery.azurecr.io
+        username: ${{ secrets.REGISTRY_USERNAME }}
+        password: ${{ secrets.REGISTRY_PASSWORD }}
+    - run: |
+        docker build -t kwettercontainerregistery.azurecr.io/likeservice:${{ github.sha }} -f LikeService_Dockerfile .
+        docker push kwettercontainerregistery.azurecr.io/likeservice:${{ github.sha }}
