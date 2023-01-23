@@ -50,16 +50,12 @@ jobs:
     - name: 'Login via Azure CLI'
       uses: azure/login@v1
       with:
-        client-id: ${{ secrets.REGISTRY_USERNAME }}
-        tenant-id: ${{ secrets.AZURE_TENANT_ID }}
-        subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-    
-    - name: Push to ACR
-    - uses: azure/docker-login@v1
-      with:
         login-server: kwettercontainerregistery.azurecr.io
         username: ${{ secrets.REGISTRY_USERNAME }}
         password: ${{ secrets.REGISTRY_PASSWORD }}
+        
+    - name: Push to ACR
+    - uses: azure/docker-login@v1
     - run: |
         docker build . -t kwettercontainerregistery.azurecr.io/kweetservice:${{ github.sha }}
         docker push kwettercontainerregistery.azurecr.io/kweetservice:${{ github.sha }}
