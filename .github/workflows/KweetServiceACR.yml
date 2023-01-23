@@ -12,7 +12,6 @@ jobs:
     defaults:
       run:
         shell: bash
-        working-directory: Kwetter.KweetService/Kwetter.KweetService.csproj
     steps:
     - uses: actions/checkout@v2
     - uses: azure/docker-login@v1
