@@ -46,16 +46,24 @@ jobs:
         file: KweetService_Dockerfile
         push: true
         tags: ${{ secrets.DOCKERHUB_USERNAME }}/kweetservice:latest
-        
-    - name: Build Container Image
-      uses: actions/checkout@v2
-      
-    - name: Login ACR and Push
+---
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
+        working-directory: dotnet
+    steps:
+    - uses: actions/checkout@v2
     - uses: azure/docker-login@v1
       with:
         login-server: kwettercontainerregistery.azurecr.io
         username: ${{ secrets.REGISTRY_USERNAME }}
         password: ${{ secrets.REGISTRY_PASSWORD }}
     - run: |
-        docker build . -t kwettercontainerregistery.azurecr.io/myapp:${{ github.sha }}
-        docker push kwettercontainerregistery.azurecr.io/myapp:${{ github.sha }}
+        docker build . -t kwettercontainerregistery.azurecr.io/kweetservice:${{ github.sha }}
+        docker push kwettercontainerregistery.azurecr.io/kweetservice:${{ github.sha }}
