@@ -20,5 +20,5 @@ jobs:
         username: ${{ secrets.REGISTRY_USERNAME }}
         password: ${{ secrets.REGISTRY_PASSWORD }}
     - run: |
-        docker build KweetService_Dockerfile . -t kwettercontainerregistery.azurecr.io/kweetservice:${{ github.sha }}
+        docker build -t kwettercontainerregistery.azurecr.io/kweetservice:${{ github.sha }} -f KweetService_Dockerfile .
         docker push kwettercontainerregistery.azurecr.io/kweetservice:${{ github.sha }}
