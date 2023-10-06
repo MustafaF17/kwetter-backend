@@ -13,22 +13,25 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
-    - name: Debugging Info
+    - name: Build Docker Compose container
       run: |
-        echo "Current directory: $PWD"
-        ls -la
-        echo "Contents of service-account.json:"
-        cat service-account.json
+        docker build -t gcr.io/quad-test-401209/docker-compose-container .
 
-    - name: Set up Service Account
+    - name: Push Docker Compose container to GCR
       env:
         GCP_SA_KEY: ${{ secrets.GCP_SA_KEY }}
       run: |
         echo "$GCP_SA_KEY" > service-account.json
         gcloud auth activate-service-account --key-file=service-account.json
         gcloud config set project quad-test-401209
+        gcloud auth configure-docker
+        docker push gcr.io/quad-test-401209/docker-compose-container
 
     - name: Deploy to GCE
+      env:
+        GCP_SA_KEY: ${{ secrets.GCP_SA_KEY }}
       run: |
-        echo "Pulling Docker image and running..."
+        echo "$GCP_SA_KEY" > service-account.json
+        gcloud auth activate-service-account --key-file=service-account.json
+        gcloud config set project quad-test-401209
         gcloud compute ssh quad-test --zone=europe-west3-c --command="docker pull gcr.io/quad-test-401209/docker-compose-container && docker run -v /var/run/docker.sock:/var/run/docker.sock gcr.io/quad-test-401209/docker-compose-container up -d"
