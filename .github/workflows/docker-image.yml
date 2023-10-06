@@ -1,0 +1,26 @@
+name: Docker Build and Deploy
+
+on:
+  push:
+    branches:
+      - main # Adjust this if your default branch is named differently
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    # Step 1: Checkout the code from the repository
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    # Step 2: List the content of the current directory
+    - name: List directory contents
+      run: ls -al
+
+    # Step 3: Build the Docker image
+    - name: Build Docker Image
+      run: docker build -t your-image-name .
+
+    # Additional steps for your workflow (like pushing the image) can go here...
+
